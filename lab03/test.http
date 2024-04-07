@@ -1,13 +1,13 @@
-#GET http://localhost:3000/films/unseen
+GET http://localhost:3000/films/unseen
 
-#GET http://localhost:3000/films/2
+GET http://localhost:3000/films/2
 
-#POST http://localhost:3000/films
+POST http://localhost:3000/films
 
-#PUT http://localhost:3000/films/4
+PUT http://localhost:3000/films/4
 
-#PUT http://localhost:3000/films/4/rating
+PUT http://localhost:3000/films/4/rating
 
-#PUT http://localhost:3000/films/3/favorite
+PUT http://localhost:3000/films/3/favorite
 
-#DELETE http://localhost:3000/films/4
+DELETE http://localhost:3000/films/4
