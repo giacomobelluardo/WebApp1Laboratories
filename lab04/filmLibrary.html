@@ -6,7 +6,7 @@
     <title>FilmLibrary Web Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
     <div class="container-fluid bg-primary">
@@ -20,11 +20,11 @@
             </div>
         </nav>
     </div>
-    <div id="main" class="container">
-        <div id="sidebar-striped" class="container bg-secondary-emphasis">
+    <div id="main" class="container row">
+        <div id="sidebar" class="col-4 bg-secondary-emphasis">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Active</a>
+                  <a class="nav-link" href="#">Active</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Link</a>
@@ -33,12 +33,95 @@
                   <a class="nav-link" href="#">Link</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                  <a class="nav-link">Disabled</a>
                 </li>
               </ul>
         </div>
-        <div>
-            <table class="table">
+        <div class="col-8">
+            <h2>All</h2>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td>Pulp Fiction</td>
+                        <td>
+                            <input type="checkbox" id="isFavorite">
+                            <label for="vehicle1"> Favorite</label>
+                        </td>
+                        <td>
+                            April 4, 2024
+                        </td>
+                        <td>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                        </td>
+                        <td><button type="button" class="btn btn-outline-white text-primary"><i class="bi bi-pen"></i></button>
+                            <button type="button" class="btn btn-outline-white text-primary"><i class="bi bi-trash"></i></button> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Star Wars: A New Hope</td>
+                        <td>
+                            <input type="checkbox" id="isFavorite">
+                            <label for="vehicle1"> Favorite</label>
+                        </td>
+                        <td>
+                            May 4, 2023
+                        </td>
+                        <td>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                        </td>
+                        <td><button type="button" class="btn btn-outline-white text-primary"><i class="bi bi-pen"></i></button>
+                            <button type="button" class="btn btn-outline-white text-primary"><i class="bi bi-trash"></i></button> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>La Haine</td>
+                        <td>
+                            <input type="checkbox" id="isFavorite">
+                            <label for="vehicle1"> Favorite</label>
+                        </td>
+                        <td>
+                            February 20, 2024
+                        </td>
+                        <td>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                        </td>
+                        <td><button type="button" class="btn btn-outline-white text-primary"><i class="bi bi-pen"></i></button>
+                            <button type="button" class="btn btn-outline-white text-primary"><i class="bi bi-trash"></i></button> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Once Upon A Time in America</td>
+                        <td>
+                            <input type="checkbox" id="isFavorite">
+                            <label for="vehicle1"> Favorite</label>
+                        </td>
+                        <td>
+                            March 29, 2024
+                        </td>
+                        <td>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star"></i>
+                        </td>
+                        <td><button type="button" class="btn btn-outline-white text-primary"><i class="bi bi-pen"></i></button>
+                            <button type="button" class="btn btn-outline-white text-primary"><i class="bi bi-trash"></i></button> 
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
