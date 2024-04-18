@@ -55,11 +55,26 @@ document.addEventListener('DOMContentLoaded', event=>{
         div.appendChild(rating)
         const stars = document.createElement("div")
         stars.classList.add("rating")
-        for(let i=0; i<film.score; i++){
-            stars.innerHTML = `<i class="bi bi-star-fill"></i>`
+        console.log(film.score)
+        if(film.score != null){
+            for(let i=0; i<film.score; i++){
+                const icon = document.createElement("i")
+                icon.classList.add("bi", "bi-star-fill")
+                stars.appendChild(icon)
+            }
+            for(let i=0; i<(5-film.score); i++){
+                const icon = document.createElement("i") 
+                icon.classList.add("bi", "bi-star")
+                stars.appendChild(icon)
+            }
+
         }
-        for(let i=0; i<(5-film.score); i++){
-            stars.innerHTML = `<i class="bi bi-star"></i>`
+        else{
+            for(let i=0; i<5; i++){
+                const icon = document.createElement("i") 
+                icon.classList.add("bi", "bi-star")
+                stars.appendChild(icon)
+            }     
         }
         rating.appendChild(stars)
 
@@ -158,9 +173,9 @@ function FilmLibrary(){
     }
 }
 
-const f1 = new Film(1, 'Pulp fiction', true, dayjs('2024-03-14'), 7);
-const f2 = new Film(2, 'Taxi Driver', undefined, dayjs('2024-03-11'), 9, 5);
-const f3 = new Film(3, 'Star Wars', true, dayjs('2024-02-12'), 10);
+const f1 = new Film(1, 'Pulp fiction', true, dayjs('2024-03-14'), 3);
+const f2 = new Film(2, 'Taxi Driver', undefined, dayjs('2024-03-11'), 4, 5);
+const f3 = new Film(3, 'Star Wars', true, dayjs('2024-02-12'), 5);
 
 const l1 = new FilmLibrary();
 
