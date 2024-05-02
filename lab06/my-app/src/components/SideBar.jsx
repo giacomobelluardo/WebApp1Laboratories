@@ -1,17 +1,24 @@
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Row, Col, Table, Button } from 'react-bootstrap';
 
-function SideBar() {
+function SideBar(props) {
   return (
     <ListGroup as="ul">
-      <ListGroup.Item as="li" action href="#link1">
-        All
+      <ListGroup.Item as="li">
+        <Button variant='light' className='mx-1' onClick={()=>{props.changeFilter('All')}}>All</Button>
       </ListGroup.Item>
-      <ListGroup.Item as="li" action href="#link1">Favorites</ListGroup.Item>
-      <ListGroup.Item as="li" action href="#link1">
-        Best Rated
+      <ListGroup.Item as="li">
+        <Button variant='light' className='mx-1' onClick={()=>{props.changeFilter('Favorites')}}>Favorites</Button>
       </ListGroup.Item>
-      <ListGroup.Item as="li" action href="#link1">Seen Last Month</ListGroup.Item>
-      <ListGroup.Item as="li" action href="#link1">Unseen</ListGroup.Item>
+      <ListGroup.Item as="li">
+        <Button variant='light' className='mx-1'onClick={()=>{props.changeFilter('Best rated')}}>Best rated</Button>
+      </ListGroup.Item>
+      <ListGroup.Item as="li">
+        <Button variant='light' className='mx-1' onClick={()=>{props.changeFilter('Seen Last')}}>Seen Last Month</Button>
+      </ListGroup.Item>
+      <ListGroup.Item as="li">
+        <Button variant='light' className='mx-1' onClick={()=>{props.changeFilter('Unseen')}}>Unseen</Button>
+      </ListGroup.Item>
     </ListGroup>
   );
 }

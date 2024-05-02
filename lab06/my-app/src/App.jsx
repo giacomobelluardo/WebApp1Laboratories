@@ -5,6 +5,7 @@ import {NavigationBar} from './components/NavBar'
 import { SideBar } from './components/SideBar';
 import {Film, FilmLibrary} from './filmLibrary.mjs'
 import {Films} from './components/FilmComponents.jsx'
+import { useState } from 'react';
 
 //Library of films
 const f1 = new Film(1, 'Pulp fiction', true, dayjs('2024-03-14'), 3, 1);
@@ -19,16 +20,36 @@ l1.addFilm(f3);
 
 //APP
 function App() {
+  const [movies, setFilm] = useState(l1.allFilms());
+  const [filter, setFilter] = useState('All');
+
+  const changeFilter = (newFilter)=>{
+    setFilter(newFilter)
+
+    if(newFilter == 'All')
+      setFilm(()=>l1.allFilms())
+    if(newFilter == 'Favorites')
+      setFilm(()=>l1.favoriteFilms())
+    if(newFilter == 'Best rated')
+      setFilm(()=>l1.bestFilms())
+    if(newFilter == 'Seen Last Month')
+      setFilm(()=>l1.monthFilm())
+    if(newFilter == 'Unseen')
+      setFilm(()=>l1.unseen())
+  }
+
   return (
-    <Container fluid>
-      <NavigationBar/>
-      <Container fluid>
+    <Container fluid className="p-0">
+      <Container fluid className="p-0">
+        <NavigationBar fluid/>
+      </Container>
+      <Container fluid className="p-0">
         <Row>
-          <Col sm={4}>
-            <SideBar/>
+          <Col sm={3}>
+            <SideBar filter={filter} changeFilter={changeFilter}/>
           </Col>
-          <Col sm={8}>
-            <Films allFilms={l1.allFilms()}></Films>
+          <Col sm={9}>
+            <Films allFilms={movies} filter={filter}></Films>
           </Col>
         </Row>
       </Container>

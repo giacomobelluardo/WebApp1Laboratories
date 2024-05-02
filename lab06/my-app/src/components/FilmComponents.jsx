@@ -8,11 +8,7 @@ function Films(props) {
     return (
       <>
         <Container fluid>
-          <Row>
-            <Col lg={10} className="mx-auto">
-              <FilmTable films={props.allFilms}></FilmTable>
-            </Col> 
-          </Row>
+            <FilmTable films={props.allFilms} filter={props.filter}></FilmTable>
         </Container>
       </>
     );
@@ -24,12 +20,17 @@ Films.propTypes = {
 
 function FilmTable(props){
     return(
-        <Table striped responsive>
-        <tbody>
-          {
-            props.films.map((f) => <FilmRow film={f} key={f.id} />)
-          }
-        </tbody>
+        <Table>
+          <thead>
+            <tr>
+              <th>{props.filter}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              props.films.map((f) => <FilmRow film={f} key={f.id} />)
+            }
+          </tbody>
         </Table>
     );
 }
