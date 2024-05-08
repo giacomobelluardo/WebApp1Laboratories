@@ -53,6 +53,9 @@ function App() {
           </Col>
         </Row>
       </Container>
+      <Button variant="primary" className="rounded-circle fixed-right-bottom">
+        <i className="bi bi-plus"></i>
+      </Button>
     </Container>
   )
 }
