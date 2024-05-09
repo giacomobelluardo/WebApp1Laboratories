@@ -1,5 +1,5 @@
 import Container from 'react-bootstrap/Container';
-import { Row, Col, Table, Button, Form} from 'react-bootstrap';
+import {Table, Button, Form} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from 'react';
