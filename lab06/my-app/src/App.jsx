@@ -18,9 +18,10 @@ l1.addFilm(f1);
 l1.addFilm(f2);
 l1.addFilm(f3);
 
+let initialFilms = l1.allFilms();
+
 //APP
 function App() {
-  let initialFilms = l1.allFilms();
   const [movies, setFilm] = useState(l1.allFilms());
   const [filter, setFilter] = useState('All');
 
@@ -40,7 +41,9 @@ function App() {
   }
 
   const deleteFilm = (id) => {
-    initialFilms = initialFilms.filter((a)=>(a.id != id))
+    initialFilms = initialFilms.filter(function(item){
+      return item.id !== id;
+    });
     setFilm(oldFilms => oldFilms.filter((a) => (a.id != id)))
   }
 
