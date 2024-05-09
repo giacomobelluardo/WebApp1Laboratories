@@ -2,17 +2,45 @@ import Container from 'react-bootstrap/Container';
 import { Row, Col, Table, Button, Form} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useState } from 'react';
+import { FilmForm } from './FilmForm';
 
 
 function Films(props) {
+    const [mode, setMode] = useState('default');
+    const [editableFilm, setEditableFilm] = useState();
+
+    const handleEdit = (film) => {
+      setEditableFilm(film);
+      setMode('edit');
+    }
+
     return (
       <>
         <Container fluid>
-            <FilmTable films={props.allFilms} filter={props.filter}></FilmTable>
+            <FilmTable films={props.allFilms} filter={props.filter} deleteFilm={props.deleteFilm} addFilm={props.addFilm} updateFilm={props.updateFilm} handleEdit={handleEdit}></FilmTable>
         </Container>
+        {mode === 'add' &&
+          <FilmForm
+            mode = {mode}
+            addFilm={(film) => {props.addFilm(film); setMode('default');}}
+            cancel={() => setMode('default')}
+          />
+        }
+
+        {mode === 'edit' &&
+          <FilmForm
+            mode={mode}
+            film  ={editableFilm}
+            cancel={() => setMode('default')}
+            updateFilm={(film) => { props.updateFilm(film); setMode('default'); }}
+          />
+        }
+
+        {mode === 'default' && <Button variant='primary' onClick={() => {setMode('add');}}><i className="bi bi-plus"></i></Button>} 
       </>
     );
-  }
+}
 
 Films.propTypes = {
     films: PropTypes.array
@@ -28,7 +56,7 @@ function FilmTable(props){
           </thead>
           <tbody>
             {
-              props.films.map((f) => <FilmRow film={f} key={f.id} />)
+              props.films.map((f) => <FilmRow film={f} key={f.id} deleteFilm={props.deleteFilm} updateFilm={props.updateFilm} handleEdit={props.handleEdit}/>)
             }
           </tbody>
         </Table>
@@ -46,7 +74,7 @@ function FilmRow(props) {
         <FilmCheckBox boolVal={props.film.favorite}></FilmCheckBox>
         <td>{props.film.date.format('YYYY-MM-DD')}</td>
         <FilmRatings rating={props.film.score}></FilmRatings>
-        <FilmActions></FilmActions>
+        <FilmActions deleteFilm={props.deleteFilm} id={props.film.id} handleEdit={props.handleEdit} film={props.film} ></FilmActions>
       </tr>
     );
   }
@@ -55,10 +83,10 @@ FilmRow.propTypes = {
     film: PropTypes.object,
 }
 
-function FilmActions() {
+function FilmActions(props) {
     return <td>
-      <Button className='mx-1'><i className='bi bi-pencil-square'></i></Button> 
-      <Button><i className='bi bi-trash'></i></Button>
+      <Button variant='warning'><i className='bi bi-pencil-square' onClick={() => { props.handleEdit(props.film) }}></i></Button> 
+      <Button variant='danger' onClick={() => { props.deleteFilm(props.id) }}><i className='bi bi-trash'></i></Button>
     </td>
 }
 
@@ -71,7 +99,6 @@ function FilmCheckBox(props){
       />
     </Form>
     </td>
-
 }
 
 FilmCheckBox.propTypes = {

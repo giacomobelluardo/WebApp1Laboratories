@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import dayjs from 'dayjs';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import {NavigationBar} from './components/NavBar'
 import { SideBar } from './components/SideBar';
 import {Film, FilmLibrary} from './filmLibrary.mjs'
@@ -20,6 +20,7 @@ l1.addFilm(f3);
 
 //APP
 function App() {
+  let initialFilms = l1.allFilms();
   const [movies, setFilm] = useState(l1.allFilms());
   const [filter, setFilter] = useState('All');
 
@@ -27,15 +28,41 @@ function App() {
     setFilter(newFilter)
 
     if(newFilter == 'All')
-      setFilm(()=>l1.allFilms())
+      setFilm(()=>initialFilms)
     if(newFilter == 'Favorites')
-      setFilm(()=>l1.favoriteFilms())
+      setFilm(()=>initialFilms.filter(f=>f.favorite))
     if(newFilter == 'Best rated')
-      setFilm(()=>l1.bestFilms())
+      setFilm(()=>initialFilms.filter(f=>f.score==5))
     if(newFilter == 'Seen Last Month')
-      setFilm(()=>l1.monthFilm())
+      setFilm(()=>initialFilms.filter(f=>f.date.month() == dayjs().format('YYYY-MM-DD').month()))
     if(newFilter == 'Unseen')
-      setFilm(()=>l1.unseen())
+      setFilm(()=>initialFilms.filter(f => !f.date))
+  }
+
+  const deleteFilm = (id) => {
+    initialFilms = initialFilms.filter((a)=>(a.id != id))
+    setFilm(oldFilms => oldFilms.filter((a) => (a.id != id)))
+  }
+
+  const addFilm = (film) => {
+    setFilm((oldFilms) => {
+      const newId = Math.max(...oldFilms.map(film => film.id)) + 1;
+      const newFilm = new Film(newId, film.title, film.favorite, film.date, film.score, 1);
+      initialFilms.push(newFilm);
+      return [...oldFilms, newFilm];
+    })
+  }
+
+  const updateFilm = (film) => {
+    setFilm(oldFilms => {
+      return oldFilms.map((movie) => {
+        if(movie.id === film.id) {
+          return new Film(film.id, film.title, film.favorite, film.date, film.score);
+        }
+        else
+          return movie;
+      });
+    });
   }
 
   return (
@@ -49,13 +76,10 @@ function App() {
             <SideBar filter={filter} changeFilter={changeFilter}/>
           </Col>
           <Col sm={9}>
-            <Films allFilms={movies} filter={filter}></Films>
+            <Films allFilms={movies} filter={filter} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>
           </Col>
         </Row>
       </Container>
-      <Button variant="primary" className="rounded-circle fixed-right-bottom">
-        <i className="bi bi-plus"></i>
-      </Button>
     </Container>
   )
 }
