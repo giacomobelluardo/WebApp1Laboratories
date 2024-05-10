@@ -1,11 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import dayjs from 'dayjs';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import {NavigationBar} from './components/NavBar'
 import { SideBar } from './components/SideBar';
 import {Film, FilmLibrary} from './filmLibrary.mjs'
 import {Films} from './components/FilmComponents.jsx'
 import { useState } from 'react';
+import dayjs from 'dayjs';
 
 //Library of films
 const f1 = new Film(1, 'Pulp fiction', true, dayjs('2024-03-14'), 3, 1);
@@ -50,7 +50,7 @@ function App() {
   const addFilm = (film) => {
     setFilm((oldFilms) => {
       const newId = Math.max(...oldFilms.map(film => film.id)) + 1;
-      const newFilm = new Film(newId, film.title, film.favorite, film.date, film.score, 1);
+      const newFilm = new Film(newId, film.title, film.favorite, dayjs(film.date), film.score);
       initialFilms.push(newFilm);
       return [...oldFilms, newFilm];
     })
@@ -60,7 +60,7 @@ function App() {
     setFilm(oldFilms => {
       return oldFilms.map((movie) => {
         if(movie.id === film.id) {
-          return new Film(film.id, film.title, film.favorite, film.date, film.score);
+          return new Film(film.id, film.title, film.favorite, dayjs(film.date), film.score, 1);
         }
         else
           return movie;
