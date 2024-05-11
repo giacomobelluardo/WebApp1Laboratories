@@ -69,6 +69,8 @@ FilmTable.propTypes = {
   }
   
 function FilmRow(props) {
+    console.log(props.film.score)
+
     return(
       <tr>
         <td>{props.film.title}</td>
