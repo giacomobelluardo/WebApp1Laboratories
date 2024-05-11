@@ -57,6 +57,14 @@ function App() {
   }
 
   const updateFilm = (film) => {
+    initialFilms = initialFilms.map((movie)=>{
+      if(movie.id === film.id){          
+        return new Film(film.id, film.title, film.favorite, dayjs(film.date), film.score, 1);
+      }
+      else
+        return movie;
+    });
+
     setFilm(oldFilms => {
       return oldFilms.map((movie) => {
         if(movie.id === film.id) {
