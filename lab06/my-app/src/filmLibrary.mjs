@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-function Film(id, title, favorite=false, date=null, score=null, user=1) {
+function Film(id, title, favorite=false, date=null, score=0, user=1) {
     this.id = id;
     this.title = title;
     this.favorite = favorite;

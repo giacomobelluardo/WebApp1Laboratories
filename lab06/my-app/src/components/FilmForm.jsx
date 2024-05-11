@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import {Form, Button} from 'react-bootstrap'
+import {Form, Button, Dropdown, DropdownButton} from 'react-bootstrap'
 
 function FilmForm(props){
   const [title, setTitle] = useState(props.film ? props.film.title : '');
@@ -47,10 +47,18 @@ function FilmForm(props){
         </Form.Control>
       </Form.Group>
       <Form.Group className='mb-3'>
-        <Form.Label>
-          Rating
-        </Form.Label>s
-        <Form.Control type='number' min={0} max={5} value={score} onChange={(event)=>setRating(event.target.value)}></Form.Control>
+        <DropdownButton
+          variant="outline-secondary"
+          title="Rate the film"
+          value={score}
+          onSelect={(event)=>setRating(event.target.value)}
+        >
+          <Dropdown.Item value={1}>1</Dropdown.Item>
+          <Dropdown.Item value={2}>2</Dropdown.Item>
+          <Dropdown.Item value={3}>3</Dropdown.Item>
+          <Dropdown.Item value={4}>4</Dropdown.Item>
+          <Dropdown.Item value={5}>5</Dropdown.Item>
+        </DropdownButton>
       </Form.Group>
       {props.mode==='add' && <Button variant='primary' type='Submit'>Add</Button>}
       {props.mode==='edit' && <Button variant='primary' type='Submit'>Edit</Button>}
