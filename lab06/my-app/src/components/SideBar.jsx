@@ -14,7 +14,7 @@ function SideBar(props) {
         <Button variant='light' className='mx-1'onClick={()=>{props.changeFilter('Best rated')}}>Best rated</Button>
       </ListGroup.Item>
       <ListGroup.Item as="li">
-        <Button variant='light' className='mx-1' onClick={()=>{props.changeFilter('Seen Last')}}>Seen Last Month</Button>
+        <Button variant='light' className='mx-1' onClick={()=>{props.changeFilter('Seen Last Month')}}>Seen Last Month</Button>
       </ListGroup.Item>
       <ListGroup.Item as="li">
         <Button variant='light' className='mx-1' onClick={()=>{props.changeFilter('Unseen')}}>Unseen</Button>

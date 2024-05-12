@@ -19,6 +19,9 @@ l1.addFilm(f2);
 l1.addFilm(f3);
 
 let initialFilms = l1.allFilms();
+const month = dayjs().month();
+
+console.log(month);
 
 //APP
 function App() {
@@ -35,7 +38,7 @@ function App() {
     if(newFilter == 'Best rated')
       setFilm(()=>initialFilms.filter(f=>f.score==5))
     if(newFilter == 'Seen Last Month')
-      setFilm(()=>initialFilms.filter(f=>f.date.month() == dayjs().format('YYYY-MM-DD').month()))
+      setFilm(()=>initialFilms.filter(f=>f.date.month() === month))
     if(newFilter == 'Unseen')
       setFilm(()=>initialFilms.filter(f => !f.date))
   }
