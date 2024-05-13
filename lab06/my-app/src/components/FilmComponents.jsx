@@ -6,7 +6,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from 'react';
 import { FilmForm } from './FilmForm';
 
-
 function Films(props) {
     const [mode, setMode] = useState('default');
     const [editableFilm, setEditableFilm] = useState();
@@ -69,8 +68,6 @@ FilmTable.propTypes = {
   }
   
 function FilmRow(props) {
-    console.log(props.film.score)
-
     return(
       <tr>
         <td>{props.film.title}</td>
@@ -110,17 +107,17 @@ FilmCheckBox.propTypes = {
 
 function FilmRatings(props){
     return <td>
-      {[...Array(props.rating)].map((i)=>{
-        return(
-          <i className="bi bi-star-fill"></i>
-        );
-      })}
-      {[...Array(5-props.rating)].map((i)=>{
-        return(
-          <i className="bi bi-star"></i>
-        );
-      })}
-    </td>
+        {[...Array(parseInt(props.rating))].map((item)=>{
+          return(
+            <i className="bi bi-star-fill"></i>
+          );
+        })}
+        {[...Array(5-parseInt(props.rating))].map((item)=>{
+          return(
+            <i className="bi bi-star"></i>
+          );
+        })}
+      </td>
 }
 
 FilmRatings.propTypes = {

@@ -6,7 +6,7 @@ function FilmForm(props){
   const [title, setTitle] = useState(props.film ? props.film.title : '');
   const [favorite, setFavorite] = useState(props.film ? props.film.favorite : false);
   const [date, setDate] = useState(props.film ? props.film.date.format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD'));
-  const [score, setRating] = useState(props.film ? props.film.score : 0);
+  const [score, setRating] = useState(props.film ? parseInt(props.film.score) : 0);
 
   const handleSubmit = (event) => {
     event.preventDefault();
