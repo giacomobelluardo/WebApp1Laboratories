@@ -5,6 +5,8 @@ import { SideBar } from './components/SideBar';
 import {Film, FilmLibrary} from './filmLibrary.mjs'
 import {Films} from './components/FilmComponents.jsx'
 import { useState } from 'react';
+import { FilmForm, EditFilmForm} from './components/FilmForm';
+import { Routes, Route, Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 //Library of films
@@ -90,7 +92,11 @@ function App() {
             <SideBar filter={filter} changeFilter={changeFilter}/>
           </Col>
           <Col sm={9}>
-            <Films allFilms={movies} filter={filter} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>
+            <Routes>
+              <Route index element={<Films allFilms={movies} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>} />
+              <Route path='add' element={<FilmForm mode='add' addFilm ={addFilm}/>} />
+              <Route path='edit/:fid' element={<EditFilmForm updateFilm={updateFilm} films={movies} />}/>
+            </Routes>
           </Col>
         </Row>
       </Container>

@@ -4,6 +4,8 @@ import {Table, Button, Form} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { FilmForm } from './FilmForm';
 
 function Films(props) {
@@ -15,29 +17,15 @@ function Films(props) {
       setMode('edit');
     }
 
+    const navigate = useNavigate();
+
+
     return (
       <>
         <Container fluid>
             <FilmTable films={props.allFilms} filter={props.filter} deleteFilm={props.deleteFilm} addFilm={props.addFilm} updateFilm={props.updateFilm} handleEdit={handleEdit}></FilmTable>
         </Container>
-        {mode === 'add' &&
-          <FilmForm
-            mode = {mode}
-            addFilm={(film) => {props.addFilm(film); setMode('default');}}
-            cancel={() => setMode('default')}
-          />
-        }
-
-        {mode === 'edit' &&
-          <FilmForm
-            mode={mode}
-            film  ={editableFilm}
-            cancel={() => setMode('default')}
-            updateFilm={(film) => { props.updateFilm(film); setMode('default'); }}
-          />
-        }
-
-        {mode === 'default' && <Button variant='primary' onClick={() => {setMode('add');}}><i className="bi bi-plus"></i></Button>} 
+        <Button variant='primary' onClick={() => {setMode('add'); navigate('/add')}}><i className="bi bi-plus"></i></Button>
       </>
     );
 }
@@ -84,8 +72,10 @@ FilmRow.propTypes = {
 }
 
 function FilmActions(props) {
+    const navigate = useNavigate();
+
     return <td>
-      <Button variant='warning'><i className='bi bi-pencil-square' onClick={() => { props.handleEdit(props.film) }}></i></Button> 
+      <Button variant='warning' onClick={() => { navigate(`edit/${props.id}`) }}><i className='bi bi-pencil-square'></i></Button> 
       <Button variant='danger' onClick={() => { props.deleteFilm(props.id) }}><i className='bi bi-trash'></i></Button>
     </td>
 }

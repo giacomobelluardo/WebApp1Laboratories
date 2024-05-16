@@ -1,12 +1,31 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import {Form, Button} from 'react-bootstrap'
+import { useNavigate, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types'; 
+
+function EditFilmForm(props) {
+  const params = useParams();
+  const fid = params.fid;
+
+  const find_film = props.films.filter(f => f.id == fid)
+  const film = find_film[0]
+
+  return <FilmForm film={film} mode='edit' updateFilm={props.updateFilm} />
+}
+
+EditFilmForm.propTypes = {
+  films: PropTypes.array.isRequired,
+  updateFilm: PropTypes.func.isRequired
+};
 
 function FilmForm(props){
   const [title, setTitle] = useState(props.film ? props.film.title : '');
   const [favorite, setFavorite] = useState(props.film ? props.film.favorite : false);
   const [date, setDate] = useState(props.film ? props.film.date.format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD'));
   const [score, setRating] = useState(props.film ? parseInt(props.film.score) : 0);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +38,7 @@ function FilmForm(props){
     else {
       props.addFilm(film);
     }
+    navigate('..'); // back to list of answers
   }
 
   return(
@@ -58,9 +78,15 @@ function FilmForm(props){
       {props.mode==='add' && <Button variant='primary' type='Submit'>Add</Button>}
       {props.mode==='edit' && <Button variant='primary' type='Submit'>Edit</Button>}
       {' '}
-      <Button variant='danger' onClick={props.cancel}>Cancel</Button>
+      <Button variant='danger' onClick={() => { navigate('..') }}>Cancel</Button>
     </Form>
   )
-}
+};
 
-export {FilmForm};
+FilmForm.propTypes = {
+  films: PropTypes.object,
+  mode: PropTypes.string,
+  addFilm: PropTypes.func.isRequired
+};
+
+export {FilmForm, EditFilmForm};
