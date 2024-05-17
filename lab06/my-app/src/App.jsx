@@ -93,7 +93,12 @@ function App() {
           </Col>
           <Col sm={9}>
             <Routes>
-              <Route index element={<Films allFilms={movies} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>} />
+              <Route index element={<Films allFilms={l1.allFilms()} filter={filter} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>} />
+              <Route path='/all' element={<Films allFilms={initialFilms} filter={filter} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>} />
+              <Route path='/favorites' element={<Films allFilms={initialFilms.filter(f=>f.favorite)} filter={filter} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>} />
+              <Route path='/bestrated' element={<Films allFilms={initialFilms.filter(f=>f.score==5)} filter={filter} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>} />
+              <Route path='/seenlastmonth' element={<Films allFilms={initialFilms.filter(f=>f.date.month() === month)} filter={filter} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>} />
+              <Route path='/unseen' element={<Films allFilms={initialFilms.filter(f => !f.date)} filter={filter} deleteFilm={deleteFilm} addFilm={addFilm} updateFilm={updateFilm}></Films>} />
               <Route path='add' element={<FilmForm mode='add' addFilm ={addFilm}/>} />
               <Route path='edit/:fid' element={<EditFilmForm updateFilm={updateFilm} films={movies} />}/>
             </Routes>

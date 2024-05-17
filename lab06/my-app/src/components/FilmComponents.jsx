@@ -17,7 +17,6 @@ function Films(props) {
 
     const navigate = useNavigate();
 
-
     return (
       <>
         <Container fluid>
