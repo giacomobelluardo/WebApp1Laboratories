@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Routes, Route, Link } from 'react-router-dom';
-import { FilmForm } from './FilmForm';
 
 function Films(props) {
     const [mode, setMode] = useState('default');
