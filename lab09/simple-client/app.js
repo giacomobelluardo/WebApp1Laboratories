@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', event => {
 
 function writeOnPage(films, textIntro){
     const div = document.getElementById('filmList')
-    div.innerHTML = `<p>${text} films</p>`
+    div.innerHTML = `<p>${textIntro} films</p>`
     for (const f of films) {
         console.log(f)
         div.innerHTML += `<p>${f.title}</p>`
