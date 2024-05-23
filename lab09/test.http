@@ -1,0 +1,13 @@
+GET http://localhost:3001/api/films
+
+GET http://localhost:3001/api/films/2
+
+POST http://localhost:3001/api/films
+
+PUT http://localhost:3001/api/films/4
+
+PUT http://localhost:3001/api/films/4/rating
+
+PUT http://localhost:3001/api/films/3/favorite
+
+DELETE http://localhost:3001/api/films/4
